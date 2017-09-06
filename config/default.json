@@ -1,0 +1,11 @@
+{
+  "mongoose": {
+    "options": {
+      "server": {
+        "socketOptions": {
+          "keepAlive": 1
+        }
+      }
+    }
+  }
+}
