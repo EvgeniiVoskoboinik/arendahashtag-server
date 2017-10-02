@@ -25,16 +25,14 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/../arenda-hashtag-client/dist/index.html'));
 });
 
-const allowCrossDomain = function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3003');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type');
-    res.header('Access-Control-Allow-Headers', req.headers['access-control-request-headers']);
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Max-Age', 1728000);
-    next();
-};
-app.use(allowCrossDomain);
+// const allowCrossDomain = function (req, res, next) {
+//     res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     res.header("Access-Control-Allow-Credentials", true);
+//     next();
+// };
+// app.use(allowCrossDomain);
 app.options('*', function (req, res, next) {
     res.status(200).end();
 });
@@ -51,11 +49,9 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get('env') !== 'production' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.end();
+  res.status(err.status || 500).end();
 });
 
 module.exports = app;
