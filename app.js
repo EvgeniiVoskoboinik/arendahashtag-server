@@ -25,14 +25,6 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/../arenda-hashtag-client/dist/index.html'));
 });
 
-// const allowCrossDomain = function (req, res, next) {
-//     res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     res.header("Access-Control-Allow-Credentials", true);
-//     next();
-// };
-// app.use(allowCrossDomain);
 app.options('*', function (req, res, next) {
     res.status(200).end();
 });
@@ -49,7 +41,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') !== 'production' ? err : {};
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   res.status(err.status || 500).end();
 });

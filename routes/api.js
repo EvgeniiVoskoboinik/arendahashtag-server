@@ -3,14 +3,7 @@ const router = express.Router();
 const multer  = require('multer');
 const request = require('request');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.json({ response: 'Hi' });
-});
-
 router.post('/uploadPhotos', multer().any(), function (req, res, next) {
-    console.log(req.files);
-
     let r = request.post(req.query.server, function(err, httpResponse, body) {
         if (err) {
             return console.error('upload failed:', err);
