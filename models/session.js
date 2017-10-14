@@ -40,7 +40,7 @@ schema.statics.getAllSessions = function(limit, callback) {
 schema.statics.saveSession = function(_sid, vkId, callback) {
     const Session = this;
     const session = new Session({
-        sid: sid,
+        sid: _sid,
         vkId: vkId
     });
 
